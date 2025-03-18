@@ -38,11 +38,18 @@ To incrementally build the project:
 npm run build
 ```
 
-La base de datos usando para el proeycto  es llamndo usuario-crud, con la tabla usuario, siendo esta la estructura:
+Configuración de la Base de Datos
+Este proyecto usa una base de datos llamada usuario-crud, que contiene una tabla usuario.
+
+Si la base de datos aún no existe, puedes crearla manualmente en MySQL:
+
+
+CREATE DATABASE usuario_crud;
+USE usuario_crud;
+
 CREATE TABLE usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     edad INT NOT NULL
 );
-
