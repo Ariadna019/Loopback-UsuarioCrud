@@ -5,7 +5,7 @@ Este proyecto es una API REST creada con LoopBack que permite gestionar informac
 
 
 
-Configuración de la Base de Datos
+Configuración de la Base de Datos:
 Este proyecto usa una base de datos llamada usuario-crud, que contiene una tabla usuario.
 
 Si la base de datos aún no existe, puedes crearla manualmente en MySQL:
@@ -21,33 +21,89 @@ CREATE TABLE usuario (
     edad INT NOT NULL
 );
 
-## Install dependencies
+Para que te funcione el codigo de api rest con loopback con mi base de datos es necesrio que cumplas estos pasos:
 
+Primer paso:debes clonar el repositorio a tu computadora 
 ```sh
-npm install
+git clone  https://github.com/Ariadna019/Loopback-UsuarioCrud.git
+cd usuarios-crud
 ```
 
-To only install resolved dependencies in `package-lock.json`:
+Segundo paso: intalar la dependencia
 
 ```sh
-npm ci
+npm  install
 ```
 
-## Run the application
+Terce paso ;: configuar Mysql; Si la base de datos aún no existe, créala manualmente ejecutando:
 
+```sql
+CREATE DATABASE usuario_crud;
+USE usuario_crud;
+
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    edad INT NOT NULL
+);
+
+```
+
+Cuarto paso; configurar la conexion  a la base de datos 
+ Asegúrate de configurar correctamente la conexión en LoopBack. Revisa el archivo src/datasources/mysql.datasource.ts y ajusta los valores según tu configuración:
+```ts
+const config = {
+  name: 'mysql',
+  connector: 'mysql',
+  url: '',
+  host: 'localhost',
+  port: 3306,
+  user: 'root',// Cambia esto si usas otro usuario
+  password: '',  // Ingresa tu contraseña de MySQL si es necesario
+  database: 'usuario_crud'
+};
+ ```
+Quinto Paso :Ejecutas  la aplicacion :
 ```sh
 npm start
+ ```
+La API estará disponible en http://127.0.0.1:3000/
+
+Sexto paso:PRUEBAS DE LA API
+Obtener los Usuarios
+```nginx
+GET http://127.0.0.1:3000/usuarios
+
+
+ ```
+ Crear un usuario (POST en Postman) de esta forma  pruebas   "con GET, POST , DELETE , PUT "
+
+```json
+
+{
+  "nombre": "Carlos Gómez",
+  "email": "carlos@gmail.com",
+  "edad": 28
+}
+
+```
+Actualziar un Usuario
+ ```
+
+PUT http://127.0.0.1:3000/usuarios/1
+
+```
+Elimianr usuario
+ ```
+
+DELETE http://127.0.0.1:3000/usuarios/1
+
 ```
 
-You can also run `node .` to skip the build step.
 
-Open http://127.0.0.1:3000 in your browser.
 
-## Rebuild the project
 
-To incrementally build the project:
 
-```sh
-npm run build
 ```
 
